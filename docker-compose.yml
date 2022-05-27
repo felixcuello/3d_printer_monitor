@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  3d_fdm_prediction_api:
+    build:
+      context: .
+      dockerfile: ./3d_fdm_prediction_api/Dockerfile
+
+  3d_fdm_prediction_service:
+    build:
+      context: .
+      dockerfile: ./3d_fdm_prediction_api/Dockerfile
+
+  3d_fdm_prediction_db:
+    image: postgres:14.3-bullseye
+    environment:
+      - POSTGRES_DB=3d_fdm_db
+      - POSTGRES_USER=3d_fdm_user
+      - POSTGRES_PASSWORD=3d_fdm_password
+    volumes:
+      - ./3d_fdm_prediction_db:/var/lib/postgresql/data
